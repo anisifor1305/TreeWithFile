@@ -1,6 +1,10 @@
+package Writer;
+
+import FamilyTree.FamilyTree;
+
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable {
     public boolean save (Serializable serializable, String filePath) {
 
         try {
@@ -15,7 +19,6 @@ public class FileHandler implements Writable{
         }
     }
     public FamilyTree read (String filePath) {
-
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(filePath));
             FamilyTree serialisableRestore = (FamilyTree) is.readObject();
