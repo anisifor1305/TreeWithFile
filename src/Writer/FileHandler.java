@@ -19,10 +19,10 @@ public class FileHandler implements Writable {
         }
     }
     public FamilyTree read (String filePath) {
+        //прочитываем из файла
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(filePath));
             FamilyTree serialisableRestore = (FamilyTree) is.readObject();
-            is.close();
             return serialisableRestore;
         }
         catch (Exception ex){

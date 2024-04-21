@@ -1,25 +1,29 @@
-package Human;
+package Dogs;
 
 import FamilyTree.FamilyMember;
 import Human.Comparators.NameWithDob;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 
-public class Human implements Serializable, FamilyMember, NameWithDob {
+public class Dog implements Serializable,FamilyMember, NameWithDob {
     private int id;
     private String name;
     private LocalDate dob, dod;
     private Gender gender;
-    private Human father, mother;
-    private Human spouse;
+    private Dog father, mother;
+    private Dog spouse;
     private List<FamilyMember> childrenList;
     private List<FamilyMember> parentsList;
+//    public Human.Human(String name, Human.Gender gender, LocalDate dob, LocalDate dod, Object father, Object mother) {
+//    }
 
-
-    public Human(String name, Gender gender, LocalDate dob, LocalDate dod, Human father, Human mother){
+    public Dog(String name, Gender gender, LocalDate dob, LocalDate dod, Dog father, Dog mother){
         this.name = name;
         this.gender = gender;
         this.dob=dob;
@@ -27,44 +31,44 @@ public class Human implements Serializable, FamilyMember, NameWithDob {
         this.mother=mother;
         childrenList = new ArrayList<>();
         parentsList = new ArrayList<>();
-        NumerateHuman numerateHuman = new NumerateHuman();
-        id = numerateHuman.gethumanId();
+        NumerateDog numerateHuman = new NumerateDog();
+        id = numerateHuman.getdogId();
     }
 
-    public Human(String name, Gender gender, LocalDate dob, Human father, Human mother) {
+    public Dog(String name, Gender gender, LocalDate dob, Dog father, Dog mother) {
         this(name, gender, dob,null, father, mother);
     }
 
 
 
 
-    public Human(String name, Gender gender, LocalDate dob) {
+    public Dog(String name, Gender gender, LocalDate dob) {
         this(name, gender, dob, null, null, null);
     }
 
-    public void addChildren (Human child){
+    public void addChildren (Dog child){
         if(!childrenList.contains(child)){
             childrenList.add(child);
         }
     }
-//    public boolean addParents(Human parent) {
-//        if (parentsList.contains(parent)) {
-//            return false;
-//        }
-//        else if (parent.getGender().equals(Gender.Мужской)) {
-//            if (father == null){
-//                setFather(parent);
-//                parentsList.add(parent);
-//            }
-//        }
-//        else if (parent.getGender().equals(Gender.Женский)) {
-//            if (mother == null){
-//                setMother(parent);
-//                parentsList.add(parent);
-//            }
-//        }
-//        return true;
-//    }
+    public boolean addParents(Dog parent) {
+        if (parentsList.contains(parent)) {
+            return false;
+        }
+        else if (parent.getGender().equals(Gender.Мужской)) {
+            if (father == null){
+                setFather(parent);
+                parentsList.add(parent);
+            }
+        }
+        else if (parent.getGender().equals(Gender.Женский)) {
+            if (mother == null){
+                setMother(parent);
+                parentsList.add(parent);
+            }
+        }
+        return true;
+    }
 //    public boolean addParents(Human parent) {
 //        if (parentsList.contains(parent)) {
 //            return false;
@@ -78,34 +82,29 @@ public class Human implements Serializable, FamilyMember, NameWithDob {
 //            parentsList.add(parent);
 //        return true;
 //    }
-    @Override
     public List<FamilyMember> getParents(){
         return this.parentsList;
     }
-    @Override
+
     public List<FamilyMember> getChildrenList () {
         return this.childrenList;
     }
 
     @Override
     public void addParents(FamilyMember parent) {
-        if(!this.parentsList.contains(parent)){
-            this.parentsList.add(parent);
-        }
+
     }
 
     @Override
     public void addChildren(FamilyMember child) {
-        if(!this.childrenList.contains(child)){
-            this.childrenList.add(child);
-        }
+
     }
 
-    public void addSpouse (Human human) {
-        spouse=human;
+    public void addSpouse (Dog dog) {
+        spouse= dog;
     }
 
-    public Human getSpouse () {
+    public Dog getSpouse () {
         return this.spouse;
     }
 
@@ -145,24 +144,36 @@ public class Human implements Serializable, FamilyMember, NameWithDob {
     }
 
 
-    public void setMother(Human mother) {
+    public void setMother(Dog mother) {
         this.mother = mother;
     }
 
-    public Human getMother() {
+    public Dog getMother() {
         return mother;
     }
 
 
-    public void setFather(Human father) {
+    public void setFather(Dog father) {
         this.father = father;
     }
 
-    public Human getFather() {
+    public Dog getFather() {
         return father;
     }
 
 
+    public static class  DateOfBirthComparator implements Comparator<Dog>{
+        @Override
+        public int compare(Dog o1, Dog o2) {
+            return o1.dob.compareTo(o2.dob);
+        }
+    }
+    public static class  NameComparator implements Comparator<Dog>{
+        @Override
+        public int compare(Dog o1, Dog o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
     @Override
 
     public boolean equals(Object obj) {
@@ -173,7 +184,7 @@ public class Human implements Serializable, FamilyMember, NameWithDob {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Human other = (Human) obj;
+        Dog other = (Dog) obj;
         return Objects.equals(this.getId(), other.getId());
 
         }
@@ -238,8 +249,8 @@ public class Human implements Serializable, FamilyMember, NameWithDob {
     }
     sb.append("Дети: ");
     if (childrenList != null && !childrenList.isEmpty()) {
-        for (FamilyMember unit : childrenList) {
-            sb.append(unit.getName());
+        for (FamilyMember member : childrenList) {
+            sb.append(member.getName());
         }
     }
     else{
