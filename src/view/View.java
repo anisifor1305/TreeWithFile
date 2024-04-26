@@ -39,8 +39,8 @@ public class View {
 
     public void getHumanByName() {
         System.out.println("Введите имя: ");
-        Scanner sc = new Scanner(System.in);
-        String nameOfHuman = sc.nextLine();
+        Scanner scanner2 = new Scanner(System.in);
+        String nameOfHuman = scanner2.nextLine();
         presenter.getHumanByName(nameOfHuman);
     }
 
