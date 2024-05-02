@@ -5,6 +5,9 @@ import presenter.Presenter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+
+import model.FamilyTree;
 
 public class View {
 
@@ -19,6 +22,9 @@ public class View {
         commandList.add(new CommandSortByName(this));
         commandList.add(new CommandSortByAge(this));
         commandList.add(new CommandGetHumanByName(this));
+        commandList.add(new CommandSaveFamilyTree(this));
+        commandList.add(new CommandReadFamilyTree(this));
+        commandList.add(new CommandAddMember(this));
 
         for (int i = 0; i < commandList.size(); i++) {
             System.out.println(i + ": " + commandList.get(i).description());
@@ -52,7 +58,16 @@ public class View {
         this.presenter = presenter;
     }
 
-    public void commandReadFamilyTree() {
+    public void saveFamilyTree() {
+        presenter.save();
     }
+    public void readFamilyTree() {
+        FamilyTree tree = presenter.read();
+        System.out.println(tree.humanList);
+    }
+    public void addFTMember() {
+        presenter.add();
+    }
+    
 }
 

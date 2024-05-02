@@ -4,17 +4,17 @@ package view;
 public class CommandReadFamilyTree implements Commandable {
     View view;
 
-    public CommandReadFamilyTree(){
+    public CommandReadFamilyTree(View view){
         this.view = view;
     }
     @Override
     public void execute() {
-        view.commandReadFamilyTree();
+        view.readFamilyTree();
 
     }
     @Override
     public String description() {
-        return "Напечатаем дерево";
+        return "Чтение дерева";
     }
 }
 

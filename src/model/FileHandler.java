@@ -11,7 +11,7 @@ public class FileHandler implements Writable, Serializable {
     }
 
     public FileHandler() {
-        this.filename = "Tree.dat";
+        this.filename = "tree.dat";
     }
 
     @Override

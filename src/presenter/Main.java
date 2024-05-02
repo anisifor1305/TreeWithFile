@@ -24,5 +24,6 @@ public class Main implements Serializable{
         view.setPresenter(presenter);
         view.view();
 
+
     }
 }

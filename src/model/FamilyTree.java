@@ -50,7 +50,6 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T>{
 
 
     public Human getHumanByName(String nameOfHuman) {
-
         for (Human human : humanList) {
             if (human.getName().equals(nameOfHuman)) {
                 return human;

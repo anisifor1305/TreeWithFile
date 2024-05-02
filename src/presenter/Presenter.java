@@ -1,8 +1,13 @@
 package presenter;
 
+import java.io.File;
+import java.util.Scanner;
+
 import model.FamilyTree;
 import model.Human;
 import view.View;
+
+import model.FileHandler;
 
 
 public class Presenter<T extends Human>{
@@ -38,6 +43,38 @@ public class Presenter<T extends Human>{
     public void sortByName(){
         familyTree.sortByName();
         System.out.println(familyTree.getAllHuman());
+    }
+    public void save(){
+        FileHandler fh = new FileHandler();
+        fh.setFilename("tree.dat");
+        fh.save(familyTree);
+    }
+    public FamilyTree read(){
+        FileHandler fh = new FileHandler();
+        fh.setFilename("tree.dat");
+        FamilyTree<T> ft = fh.read();
+        return ft;
+    }
+    public void add(){
+        FileHandler fh = new FileHandler();
+        fh.setFilename("tree.dat");
+        FamilyTree<Human> ft = fh.read();
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("Введите имя");
+        String newName = sc1.nextLine();
+        System.out.println("Введите год рождения");
+        int newYob = sc1.nextInt();
+        System.out.println("Введите пол");
+        Scanner sc3 = new Scanner(System.in);
+        String newGender = sc3.nextLine();
+        sc1.close();
+        sc3.close();
+        Human newHuman = new Human(newName, newYob, newGender, null, null);
+        ft.addHuman(newHuman);
+        FileHandler fh1 = new FileHandler();
+        fh1.setFilename("tree.dat");
+        fh1.save(ft);
+        System.out.println(ft.humanList);
     }
 
 }
